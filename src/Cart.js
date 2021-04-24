@@ -16,8 +16,7 @@ function Cart() {
 
     return (
         <div>
-            {<CartItemList data={data}/>}
-            {JSON.stringify(data)}
+            {data && <CartItemList data={data}/>}
         </div>
     )
 }
