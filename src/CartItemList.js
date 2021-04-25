@@ -1,11 +1,18 @@
+
+import cartItemListCss from './CartItemListCss.css';
 import CartItem from './CartItem';
 
 
 function CartItemList(props){
-    console.log("CartItemList",props)
     return(
         <>
-            {props.data.map((elem,index)=> <CartItem key={index} dataProduct={elem}/>)}
+            {props.data.map((elem)=>
+                <CartItem
+                key={elem.id}
+                dataProduct={elem}
+                onDelete={props.onDelete}
+                onButtonAdd={props.onButtonAdd}
+            />)}
         </>
     )
 }
