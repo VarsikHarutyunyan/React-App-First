@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import CartItemList from "./CartItemList";
-import  "./CartCss.css"
+import "./CartCss.css"
 import CartHeader from './CartHeader';
- import CartFooter from './CartFooter';
+import CartFooter from './CartFooter';
 
 function Cart() {
     const [data, setData] = useState();
@@ -18,39 +18,26 @@ function Cart() {
 
     return (
         <div className="aa">
-            <CartHeader/>
-            {data && <CartItemList data={data}
-             onDelete={
-                 (dataProduct)=>{
-                 setData(data.filter((t)=> t.id !== dataProduct.id ))
-                 } }
-
-             onButtonAdd={
-
-                 (dataProduct)=>{
-                     debugger;
-
-                     setData(()=>
-                     {
-
-                         console.log("10000")
-                         for(let i=0; i< data.length-1;i++)
-                           {
-                               console.log("10001")
-                         if(dataProduct.id===data[i].id)
-                         {
-
-                             data[i].quantity = data[i].quantity++;
-                             console.log("----")
-                             console.log(data[i].quantity)
-                             console.log(data[i].id)
-                             console.log("----")
-                         }}
-                     })
-                 }
-             }
-            /> }
-            <CartFooter/>
+            <CartHeader />OnAddBtnClick
+            {data && <CartItemList data={data} id={data.id}
+                onDelete={
+                    (dataProduct) => {
+                        setData(data.filter((t) => t.id !== dataProduct.id))
+                    }}
+                onButtonAdd={
+                    (dataProduct) => {
+                        setData(
+                            data.map(x => {
+                                if (x.id === dataProduct.id) {
+                                    ++x.quantity
+                                }
+                                return x
+                            })
+                        )
+                    }
+                }
+            />}
+            <CartFooter />
         </div>
     )
 }
